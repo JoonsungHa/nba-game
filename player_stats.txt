@@ -1,0 +1,76 @@
+Player: Stephen Curry
+Three (open): 99
+Midrange (open): 94
+Layup (driving): 97
+
+
+Player: D'Angelo Russell
+Three (open): 83
+Midrange (open): 93
+Layup (driving): 90
+
+
+Player: Klay Thompson
+Three (open): 94
+Midrange (open): 92
+Layup (driving): 89
+
+
+Player: Draymond Green
+Three (open): 72
+Midrange (open): 69
+Layup (driving): 75
+
+
+Player: Kevon Looney
+Three (open): 56
+Midrange (open): 72
+Layup (driving): 77
+
+
+Player: Rajon Rondo
+Three (open): 71
+Midrange (open): 65
+Layup (driving): 74
+
+
+Player: Danny Green
+Three (open): 77
+Midrange (open): 66
+Layup (driving): 72
+
+
+Player: Lebron James
+Three (open): 73
+Midrange (open): 75
+Layup (driving): 90
+
+
+Player: Kyle Kuzma
+Three (open): 77
+Midrange (open): 71
+Layup (driving): 82
+
+
+Player: Anthony Davis
+Three (open): 74
+Midrange (open): 79
+Layup (driving): 83
+
+
+Player: Ricky Rubio
+Three (open): 73
+Midrange (open): 82
+Layup (driving): 71
+
+
+Player: Devin Booker
+Three (open): 83
+Midrange (open): 83
+Layup (driving): 84
+
+
+Player: Mikal Bridges
+Three (open): 71
+Midrange (open): 77
+Layup (driving): 72

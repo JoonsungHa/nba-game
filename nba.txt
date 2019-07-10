@@ -1,0 +1,20 @@
+Team: Golden State Warriors
+Pg: Stephen Curry
+Sg: D'Angelo Russell
+Sf: Klay Thompson
+Pf: Draymond Green
+C: Kevon Looney
+
+Team: Los Angeles Lakers
+Pg: Rajon Rondo
+Sg: Danny Green
+Sf: Lebron James
+Pf: Kyle Kuzma
+C: Anthony Davis
+
+Team: Phoenix Suns
+Pg: Ricky Rubio
+Sg: Devin Booker
+Sf: Mikal Bridges
+Pf: Kelly Oubre Jr.
+C: Deandre Ayton
