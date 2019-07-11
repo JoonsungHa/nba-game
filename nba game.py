@@ -89,7 +89,6 @@ def turnover(player_1,team_1_players,team_2_players):
 
 
 
-    
 
 
 def making_three(stats):
@@ -180,30 +179,39 @@ def making_steal(stats):
 
 
 
+#this function will give the likelihood of a rebound after a player misses a shot
+def getting_rebound(stats):
+    pass
 
 
+
+
+
+
+
+#team_1_players ['Stephen Curry ', "D'Angelo Russell ", 'Klay Thompson ', 'Draymond Green ', 'Kevon Looney ']
+#team_2_players ['Ricky Rubio ', 'Devin Booker ', 'Mikal Bridges ', 'Kelly Oubre Jr. ', 'Deandre Ayton ']
 def play(current_ball_handler,action,team_1_players,team_2_players):
 
     stays = True
 
     while action.lower() == "pass" and stays == True:
+        #I have to make sure you can only pass to your team
         current_ball_handler = input("Who do you want pass it to:")
+        #current_ball_handler = current_ball_handler.split()
 
 
-        #run the turnover function here
+
+        #run the turnover function here to see if the pass was successful 
         stays = turnover(current_ball_handler,team_1_players,team_2_players)
 
 
 
-        #I have to make sure that each team can only pass to their teammates
-        print("STAYS", stays)
-
-
-
-        #this makes it into a list
-        current_ball_handler = current_ball_handler.split()
-        print(show_name(current_ball_handler) + "can either pass or shoot")
-        action = input("What does " + show_name(current_ball_handler) + "choose to do: ")
+        if stays == True:
+            #this makes it into a list
+            current_ball_handler = current_ball_handler.split()
+            print(show_name(current_ball_handler) + "can either pass or shoot")
+            action = input("What does " + show_name(current_ball_handler) + "choose to do: ")
 
 
     if stays == False:
@@ -221,6 +229,7 @@ def play(current_ball_handler,action,team_1_players,team_2_players):
 
 
     elif action.lower() == "shoot":
+        print("You can shoot a layup, midrange, or three")
         type_of_shot = input("What type of shot do you want to shoot: ")
         return chance_of_making(current_ball_handler,type_of_shot)
 
@@ -248,11 +257,10 @@ def main():
     data = open("nba.txt","r")
 
     #Now I want the user to choose which team they want to play as
-    desired_team_1 = input("What team do you want to play as? ")
-    #"Golden State Warriors"
-    desired_team_2 = input("What team do you want to go against? ")
-    #"Phoenix Suns"
-    
+    desired_team_1 = "Golden State Warriors"
+    #input("What team do you want to play as? ")
+    desired_team_2 = "Phoenix Suns"
+    #input("What team do you want to go against? ")
 
     desired_team_1 = desired_team_1.split()
     desired_team_2 = desired_team_2.split()
