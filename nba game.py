@@ -257,10 +257,10 @@ def main():
     data = open("nba.txt","r")
 
     #Now I want the user to choose which team they want to play as
-    desired_team_1 = "Golden State Warriors"
-    #input("What team do you want to play as? ")
-    desired_team_2 = "Phoenix Suns"
-    #input("What team do you want to go against? ")
+    desired_team_1 = input("What team do you want to play as? ")
+    #"Golden State Warriors"
+    desired_team_2 = input("What team do you want to go against? ")
+    #"Phoenix Suns"
 
     desired_team_1 = desired_team_1.split()
     desired_team_2 = desired_team_2.split()
@@ -297,13 +297,13 @@ def main():
     #to make this into a 1D list
     team_1_lst = team_1_lst[0]
     team_2_lst = team_2_lst[0]
-    print("team_1",show_name(team_1_lst))
-    print("team_2",show_name(team_2_lst))
+    print("team_1:",show_name(team_1_lst))
+    print("team_2:",show_name(team_2_lst))
 
     #this seperates the teams to their respective teams
     #I can make this neater later
-    print("team_1_players",show_name(team_1_players))
-    print("team_2_players",show_name(team_2_players))
+    print("team_1_players:",show_name(team_1_players))
+    print("team_2_players:",show_name(team_2_players))
     
     #this keeps track of the score
     team_1_points = 0
