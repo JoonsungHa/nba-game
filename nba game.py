@@ -69,6 +69,7 @@ def chance_of_making(player,type_of_shot):
 #team_1_players ['Stephen Curry ', "D'Angelo Russell ", 'Klay Thompson ', 'Draymond Green ', 'Kevon Looney ']
 #team_2_players ['Ricky Rubio ', 'Devin Booker ', 'Mikal Bridges ', 'Kelly Oubre Jr. ', 'Deandre Ayton ']
 #Turnover gives the right player
+######## THIS makes sure I can pass it to the right player
 def turnover(player_1,team_1_players,team_2_players):
 
     #use .index(name of the player)
@@ -77,14 +78,18 @@ def turnover(player_1,team_1_players,team_2_players):
     print("team_1_players",team_1_players)
 
 
-    x = team_1_players.index(player_1)
+    if player_1 in team_1_players:
+        x = team_1_players.index(player_1)
+        current_ball_defender = team_2_players[x]
+        shooting_splits = stats(current_ball_defender)
+        return making_steal(shooting_splits)
 
-    current_ball_defender = team_2_players[x]
-
-    #this is gonna get the steal rating of the player
-    shooting_splits = stats(current_ball_defender)
-
-    return making_steal(shooting_splits)
+        
+    elif player_1 in team_2_players:
+        x = team_2_players.index(player_1)
+        current_ball_defender = team_1_players[x]
+        shooting_splits = stats(current_ball_defender)
+        return making_steal(shooting_splits)
 
 
 
@@ -180,10 +185,46 @@ def making_steal(stats):
 
 
 #this function will give the likelihood of a rebound after a player misses a shot
-def getting_rebound(stats):
+#how should i decide on how rebounding works????
+#defensive and offensive rebounding might have to be in two different functions
+def getting_defensive_rebound(stats,opposing_team):
+
+    opposing_team_pg = opposing_team[0]
+    opposing_team_sg = opposing_team[1]
+    opposing_team_sf = opposing_team[2]
+    opposing_team_pf = opposing_team[3]
+    opposing_team_c = opposing_team[4]
+
+
+    shooting_splits_pg = stats(opposing_team_pg)
+    shooting_splits_sg = stats(opposing_team_sg)
+    shooting_splits_sf = stats(opposing_team_sf)
+    shooting_splits_pf = stats(opposing_team_pf)
+    shooting_splits_c = stats(opposing_team_c)
+
+
     pass
 
 
+
+
+def getting_offensive_rebound(stats,current_team):
+
+    current_team_pg = current_team[0]
+    current_team_sg = current_team[1]
+    current_team_sf = current_team[2]
+    current_team_pf = current_team[3]
+    current_team_c = current_team[4]
+
+
+    shooting_splits_pg = stats(current_team_pg)
+    shooting_splits_sg = stats(current_team_sg)
+    shooting_splits_sf = stats(current_team_sf)
+    shooting_splits_pf = stats(current_team_pf)
+    shooting_splits_c = stats(current_team_c)
+
+
+    pass
 
 
 
@@ -231,7 +272,10 @@ def play(current_ball_handler,action,team_1_players,team_2_players):
     elif action.lower() == "shoot":
         print("You can shoot a layup, midrange, or three")
         type_of_shot = input("What type of shot do you want to shoot: ")
+
         return chance_of_making(current_ball_handler,type_of_shot)
+
+        #I have to put the rebounding function here
 
 
 
@@ -258,9 +302,7 @@ def main():
 
     #Now I want the user to choose which team they want to play as
     desired_team_1 = input("What team do you want to play as? ")
-    #"Golden State Warriors"
     desired_team_2 = input("What team do you want to go against? ")
-    #"Phoenix Suns"
 
     desired_team_1 = desired_team_1.split()
     desired_team_2 = desired_team_2.split()
@@ -297,13 +339,14 @@ def main():
     #to make this into a 1D list
     team_1_lst = team_1_lst[0]
     team_2_lst = team_2_lst[0]
-    print("team_1:",show_name(team_1_lst))
-    print("team_2:",show_name(team_2_lst))
+    #print("TEAM",team_1_players)
+    print("team_1",show_name(team_1_lst))
+    print("team_2",show_name(team_2_lst))
 
     #this seperates the teams to their respective teams
     #I can make this neater later
-    print("team_1_players:",show_name(team_1_players))
-    print("team_2_players:",show_name(team_2_players))
+    print("team_1_players",show_name(team_1_players))
+    print("team_2_players",show_name(team_2_players))
     
     #this keeps track of the score
     team_1_points = 0
@@ -313,6 +356,7 @@ def main():
     
     #in this scenario team 1 starts with the ball
     #shows the current status of the game
+    #need to keep track of the time left in the game
     for i in range(5):
         current_ball_handler = team_1_players[0]
         current_team = show_name(team_1_lst)
@@ -329,9 +373,27 @@ def main():
         action = input("What does " + current_ball_handler + "choose to do: ")
 
 
+        #going to make it tell if the player missed the shot or not
+        before_the_shot = team_1_points
+
+
         team_1_points += play(current_ball_handler,action,team_1_players,team_2_players)
+
+
+        #going to make it tell if the player missed the shot or not
+        ##########DOES NOT DIFFERENTIATE BETWEEN TURNOVER AND MISSED SHOTS
+        if before_the_shot < team_1_points:
+            print(current_ball_handler + "made the shot")
+        else:
+            print(current_ball_handler + "missed the shot")
+
+
         print(show_name(team_1_lst) + "has", team_1_points, "points")
 
+
+
+        ########################
+        ########################
 
 
 
@@ -351,7 +413,21 @@ def main():
         action = input("What does " + current_ball_handler + "choose to do: ")
 
 
+        #going to make it tell if the player missed the shot or not
+        before_the_shot = team_2_points
+
+
         team_2_points += play(current_ball_handler,action,team_1_players,team_2_players)
+
+
+        #going to make it tell if the player missed the shot or not
+        if before_the_shot < team_1_points:
+            print(current_ball_handler + "made the shot")
+        else:
+            print(current_ball_handler + "missed the shot")
+
+
+
         print(show_name(team_2_lst) + "has", team_2_points, "points")
     
 
