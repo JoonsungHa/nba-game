@@ -232,15 +232,30 @@ def getting_offensive_rebound(stats,current_team):
 
 #team_1_players ['Stephen Curry ', "D'Angelo Russell ", 'Klay Thompson ', 'Draymond Green ', 'Kevon Looney ']
 #team_2_players ['Ricky Rubio ', 'Devin Booker ', 'Mikal Bridges ', 'Kelly Oubre Jr. ', 'Deandre Ayton ']
+#team_1_players ['Stephen Curry ', "D'Angelo Russell ", 'Klay Thompson ', 'Draymond Green ', 'Kevon Looney ']
+#team_2_players ['Ricky Rubio ', 'Devin Booker ', 'Mikal Bridges ', 'Kelly Oubre Jr. ', 'Deandre Ayton ']
 def play(current_ball_handler,action,team_1_players,team_2_players):
 
     stays = True
+    team_1 = team_1_players
+    team_2 = team_2_players
 
     while action.lower() == "pass" and stays == True:
-        #I have to make sure you can only pass to your team
+
+        #this gets the right team
+        if current_ball_handler in team_1_players:
+            current_team = team_1
+        else:
+            current_team = team_2
+
+
         current_ball_handler = input("Who do you want pass it to:")
         #current_ball_handler = current_ball_handler.split()
-
+        current_ball_handler += " "
+        ##########
+        while current_ball_handler not in current_team:
+            current_ball_handler = input("Who do you want pass it to:")
+            current_ball_handler += " "
 
 
         #run the turnover function here to see if the pass was successful 
@@ -276,6 +291,9 @@ def play(current_ball_handler,action,team_1_players,team_2_players):
         return chance_of_making(current_ball_handler,type_of_shot)
 
         #I have to put the rebounding function here
+
+
+
 
 
 
