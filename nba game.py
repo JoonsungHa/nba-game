@@ -73,9 +73,9 @@ def chance_of_making(player,type_of_shot):
 def turnover(player_1,team_1_players,team_2_players):
 
     #use .index(name of the player)
-    print("player_1",player_1)
-    player_1 += " "
-    print("team_1_players",team_1_players)
+    #print("player_1",player_1)
+    #player_1 += " "
+    #print("team_1_players",team_1_players)
 
 
     if player_1 in team_1_players:
