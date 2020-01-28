@@ -5,7 +5,7 @@
 #  Student's Name: Joonsung Ha
 
 #  Student's UT EID: jh69256
-#  Partner's Name: Laurence WAng
+#  Partner's Name: Laurence Wang
 
 #  Partner's UT EID: lnw653
 
@@ -33,12 +33,33 @@ def nim_sum (heaps):
         heaps[i] = into_binary
 
 
+    copy_heap = heaps
+
+
     #this lets me compare two heaps at a time and eventually find the nim_sum
-
     for i in range(len(heaps)-1):
-        print("iii",i)
-        xor_operator(heaps[i],heaps[i+1])
+        
+        value = get_nim_sum(heaps[i],heaps[i+1])
+        heaps[i+1] = value
 
+
+        #get_nim_sum(heaps[i],heaps[i+1])
+    print("VALUE",value)
+
+
+    #now this is to get xor for each individual heap
+    individual_nim_sum_lst = []
+    for i in range(len(copy_heap)):
+      individual_nim_sum = get_nim_sum(value,copy_heap[i])
+      individual_nim_sum_lst.append(individual_nim_sum)
+
+
+    print(individual_nim_sum_lst)
+
+
+
+    #now we have to compare each heap with nim_sum value and if the individual nim_sum value is less than the heap then thats the one
+    
 
 
 
@@ -55,6 +76,17 @@ def nim_sum (heaps):
 #          If the nim_sum is 0, then return 0, 0
 
 
+def get_nim_sum(heap1, heap2):
+
+  nim_sum_value_non_binary = int(heap1,2) ^ int(heap2,2)
+  nim_sum_value_binary = '{0:b}'.format(nim_sum_value_non_binary)
+
+  
+  return nim_sum_value_binary
+
+
+
+
 
 def find_heap (heaps, nim_sum):
 
@@ -62,11 +94,6 @@ def find_heap (heaps, nim_sum):
     
   return 0, 0		# placeholder for the actual return statement
 
-
-
-def xor_operator(heap1, heap2):
-    print("it hits")
-    print(heap1,heap2)
 
 
 
@@ -77,35 +104,36 @@ def main():
     data = open("nim.txt","r")
 
     num_trials = data.readline()
-    num_trials = int(num_trials)
 
-    for i in range(num_trials):
-        #gets each line of data from the textfile
-        line = data.readline()
+    if num_trials == "":
+      print("Lose Game")
 
-        #gets rid of the \n and the end
-        line = line.strip()
-
-        #makes the string into a list
-        #elements in the list are all strings right now
-        x = line.split(" ")
-        #print(x)
-        #print(type(x))
-        nim_sum(x)
-        print("DONE WITH ONE")
+    else:
+      num_trials = int(num_trials)
 
 
-  # call function nim_sum() with inputs as given
+      for i in range(num_trials):
+          #gets each line of data from the textfile
+          line = data.readline()
 
-  # call function find_heap() with inputs as given
+          #gets rid of the \n and the end
+          line = line.strip()
 
-  # print the results
+          #makes the string into a list
+          #elements in the list are all strings right now
+          x = line.split(" ")
+          #print(x)
+          #print(type(x))
+          nim_sum(x)
+          #print("DONE WITH ONE")
 
-'''
-If the nim-sum of a given line of data is zero your program will output
 
-Lose Game
-'''
+    # call function nim_sum() with inputs as given
+
+    # call function find_heap() with inputs as given
+
+    # print the results
+
 
 
 # The line above main is for grading purposes only.
