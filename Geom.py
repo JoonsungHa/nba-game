@@ -2,23 +2,23 @@ import math
 
 #  File: Geom.py
 
-#  Description:
+#  Description: finds parts of a line and a point
 
-#  Student Name:
+#  Student Name: Joonsung Ha
 
-#  Student UT EID:
+#  Student UT EID: jh69256
 
-#  Partner Name:
+#  Partner's Name: Laurence Wang
 
-#  Partner UT EID:
+#  Partner's UT EID: lnw653
 
 #  Course Name: CS 313E
 
-#  Unique Number:
+#  Unique Number: 50305
 
-#  Date Created:
+#  Date Created: 2/14/20
 
-#  Date Last Modified:
+#  Date Last Modified: 2/14/2020
 
 class Point(object):
     # constructor with default values
@@ -121,21 +121,19 @@ class Line(object):
     # and other or None if they are parallel
     def intersection_point(self, other):
         
-        x_coor = ((other.p1.y - (other.slope() * other.p1.x)) - (self.p1.y - (self.slope() * self.p1.x))/ (self.slope() - other.slope()))
-        y_coor = self.slope() * x_coor - (self.p1.y - (self.slope() * self.p1.x))
-
-        return Point(x_coor,y_coor)
+        x= (other.y_intercept().y - self.y_intercept().y)/ (self.slope() - other.slope())
+        y= self.slope() * x - self.y_intercept().y
+        return Point(x,y)
 
     # return True if two points are on the same side of the line
     # and neither points are on the line
     # return False if one or both points are on the line or both
     # are on the same side of the line
     def on_same_side(self, p1, p2):
-        print("SDFDS",type(p1))
-        print("dsfSAEW",type(self.y_intercept()))
-        if p1.y < (self.slope() * p1.x + self.y_intercept()) and p2.y < (self.slope() * p2.x + self.y_intercept()):
+
+        if p1.y < (self.slope() * p1.x + self.y_intercept().y) and p2.y < (self.slope() * p2.x + self.y_intercept().y):
             return True
-        elif p1.y > (self.slope() * p1.x + self.y_intercept()) and p2.y > (self.slope() * p2.x + self.y_intercept()):
+        elif p1.y > (self.slope() * p1.x + self.y_intercept().y) and p2.y > (self.slope() * p2.x + self.y_intercept().y):
             return True
         return False
         
@@ -150,11 +148,6 @@ class Line(object):
         if self.is_parallel_y():
             return "x = " + str(self.x_intercept().x)
         return "y = " + str(self.slope()) + "x + " + str(self.y_intercept().y)
-
-
-def is_equal (a, b):
-  tol = 1.0e-6
-  return (abs (x - y) < tol)
 
 
 
@@ -185,7 +178,7 @@ def main():
     print(q_value)
 
   # print distance between P and Q
-    print("Distance between P and Q:",p_value.dist(q_value))
+    print("Distance between P and Q:",round(p_value.dist(q_value),2))
     
 
   # print the slope of the line PQ
@@ -243,6 +236,12 @@ def main():
     h_coor = data.readline()
     h_coor = h_coor.split()
 
+    g_value = Point(float(g_coor[0]),float(g_coor[1]))
+    h_value = Point(float(h_coor[0]),float(h_coor[1]))
+
+
+    
+
   # print if the the points G and H are on the same side of PQ
 
     g_line = Line(float(g_coor[0]),float(g_coor[1]),float(h_coor[0]),float(h_coor[1]))
@@ -254,10 +253,10 @@ def main():
     
 
   # print if the the points G and H are on the same side of AB
-    if g_line.on_same_side(g_value,h_value) == True:
-        print("G and H are on the same side of PQ")
+    if a_line.on_same_side(g_value,h_value) == True:
+        print("G and H are on the same side of AB")
     else:
-        print("G and H are not on the same side of PQ")
+        print("G and H are not on the same side of AB")
 
   # close file "geom.txt"
     data.close()
